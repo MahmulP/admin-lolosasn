@@ -38,13 +38,12 @@
     <link rel="stylesheet"
         href="{{ asset('vendor/assets/vendor/libs/%40form-validation/umd/styles/index.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/assets/vendor/css/pages/page-auth.css') }}">
-    <script src="{{asset('vendor/assets/vendor/js/helpers.js')}}"></script>
-    <script src="{{asset('vendor/assets/js/config.js')}}"></script>
+    <link rel="stylesheet" href="{{ asset('vendor/assets/vendor/libs/select2/select2.css') }}" />
+    <script src="{{ asset('vendor/assets/vendor/js/helpers.js') }}"></script>
+    <script src="{{ asset('vendor/assets/js/config.js') }}"></script>
 
 </head>
 
 <body>
     <div class="layout-wrapper layout-content-navbar  ">
         <div class="layout-container">
-
-

@@ -101,11 +101,14 @@
 
                         <form class="mb-3" method="POST" action="{{ route('login') }}">
                             @csrf
-                            
+
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="text" class="form-control" type="email" name="email"
                                     placeholder="Enter your email" autofocus>
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
@@ -115,7 +118,8 @@
                                     <input type="password" id="password" class="form-control" name="password"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password" />
-                                    <span class="input-group-text cursor-pointer" id="toggle-password"><i class="bx bx-hide" id="password-icon"></i></span>
+                                    <span class="input-group-text cursor-pointer" id="toggle-password"><i
+                                            class="bx bx-hide" id="password-icon"></i></span>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -140,7 +144,7 @@
         document.getElementById('toggle-password').addEventListener('click', function() {
             const passwordInput = document.getElementById('password');
             const passwordIcon = document.getElementById('password-icon');
-            
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 passwordIcon.classList.remove('bx-hide');

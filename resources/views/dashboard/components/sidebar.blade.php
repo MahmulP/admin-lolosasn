@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo ">
-        <a href="{{ route('dashboard') }}" class="app-brand-link">
+        <a href="{{ route('dashboard.index') }}" class="app-brand-link">
             <span class="app-brand-logo demo">
                 <svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -56,8 +56,8 @@
     <ul class="menu-inner py-1">
         <li class="menu-header small text-uppercase"><span class="menu-header-text"
                 data-i18n="Dashboard">Dashboard</span></li>
-        <li class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-            <a href="{{ route('dashboard') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
+            <a href="{{ route('dashboard.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-dashboard"></i>
                 <div data-i18n="Dashboard">Dashboard</div>
             </a>
@@ -70,15 +70,15 @@
             </a>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('order') ? 'active' : '' }}">
-            <a href="{{ route('dashboard') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('orders.index') ? 'active' : '' }}">
+            <a href="{{ route('orders.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-dollar"></i>
                 <div data-i18n="Orders">Orders</div>
             </a>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('token') ? 'active' : '' }}">
-            <a href="{{ route('dashboard') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('tokens.index') ? 'active' : '' }}">
+            <a href="{{ route('tokens.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-box"></i>
                 <div data-i18n="Tokens">Tokens</div>
             </a>

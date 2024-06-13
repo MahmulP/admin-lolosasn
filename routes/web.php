@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\TransactionController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Dashboard\TokenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,13 +22,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->middleware(['auth'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     //resources
-    Route::resource('/users', UserController::class);
+    Route::resource('dashboard', DashboardController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('orders', TransactionController::class);
+    Route::resource('tokens', TokenController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

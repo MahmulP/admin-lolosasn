@@ -14,6 +14,9 @@
 <script src="{{ asset('vendor/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 <script src="{{ asset('vendor/assets/js/main.js') }}"></script>
 <script src="{{ asset('vendor/assets/js/dashboards-analytics.js') }}"></script>
+<script src="{{ asset('vendor/assets/vendor/libs/select2/select2.js') }}"></script>
+
+@stack('js')
 
 
 </body>
