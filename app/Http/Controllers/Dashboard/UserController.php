@@ -64,4 +64,22 @@ class UserController extends Controller
     {
         //
     }
+
+    public function setAsAdmin(string $id)
+    {
+        $user = Account::find($id);
+
+        $user->update(['role' => 'ADMIN']);
+
+        return redirect()->route('users.index')->with('status', 'success')->with('message', 'Data kelas berhasil diubah.');
+    }
+
+    public function setAsMember(string $id)
+    {
+        $user = Account::find($id);
+
+        $user->update(['role' => 'MEMBER']);
+
+        return redirect()->route('users.index')->with('status', 'success')->with('message', 'Data kelas berhasil diubah.');
+    }
 }

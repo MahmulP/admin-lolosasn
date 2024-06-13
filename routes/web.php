@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect('dashboard');
 });
 
 Route::middleware('auth')->group(function () {
@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::put('setadmin/{id}', [UserController::class, 'setAsAdmin'])->name('setadmin');
+    Route::put('setmember/{id}', [UserController::class, 'setAsMember'])->name('setmember');
 });
 
 require __DIR__.'/auth.php';

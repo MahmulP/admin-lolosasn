@@ -28,39 +28,56 @@
                                 <td class="fw-medium">
                                     <div class="d-flex align-items-center">
                                         <div class="avatar me-2">
-                                            <img src="https://storage.googleapis.com/lidm_211/{{ $user->avatar ?? '' }}" alt class="rounded-circle" style="width: 40px; height: 40px;">
+                                            <img src="https://storage.googleapis.com/lidm_211/{{ $user->avatar ?? '' }}"
+                                                alt class="rounded-circle" style="width: 40px; height: 40px;">
                                         </div>
                                         {{ $user->name ?? '' }}
                                     </div>
                                 </td>
-                                
-                                <td>{{$user->email ?? ''}}</td>
+
+                                <td>{{ $user->email ?? '' }}</td>
                                 <td>
-                                    {{$user->phone ?? ''}}
+                                    {{ $user->phone ?? '' }}
                                 </td>
                                 <td>
-                                    <span class="badge {{ strcasecmp($user->role, 'Admin') == 0 ? 'bg-label-primary' : 'bg-label-success' }} me-1">
+                                    <span
+                                        class="badge {{ strcasecmp($user->role, 'Admin') == 0 ? 'bg-label-primary' : 'bg-label-success' }} me-1">
                                         {{ $user->role ?? '' }}
                                     </span>
-                                </td>                                
+                                </td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                             data-bs-toggle="dropdown"><i
                                                 class="bx bx-dots-vertical-rounded"></i></button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-edit-alt me-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-trash me-1"></i> Delete</a>
+                                            @if ($user->role != 'ADMIN')
+                                                <form action="{{ route('setadmin', ['id' => $user->account_id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="dropdown-item">
+                                                        <i class="bx bx-edit-alt me-1"></i> Set as Admin
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('setmember', ['id' => $user->account_id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="dropdown-item">
+                                                        <i class="bx bx-edit-alt me-1"></i> Set as Normal Member
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                         @empty
-                        <tr>
-                            <td colspann="5" class="text-center">No data found</td>
-                        </tr>
+                            <tr>
+                                <td colspann="5" class="text-center">No data found</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
