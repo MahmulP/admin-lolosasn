@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = Account::all();
+        $users = Account::paginate(11);
         return view('dashboard.user.index', ['users' => $users]);
     }
 

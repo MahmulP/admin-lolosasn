@@ -87,11 +87,14 @@
                             </tr>
                         @empty
                             <tr>
-                                <td rowspan="6" class="text-center">No data found</td>
+                                <td colspan="6" class="text-center">No data found</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-end p-2 m-0">
+                    {{ $transactions->links() }}
+                </div>
             </div>
         </div>
 

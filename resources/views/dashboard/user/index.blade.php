@@ -59,11 +59,14 @@
                             </tr>
                         @empty
                         <tr>
-                            <td rowspan="5" class="text-center">No data found</td>
+                            <td colspann="5" class="text-center">No data found</td>
                         </tr>
                         @endforelse
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-end p-2 m-0">
+                    {{ $users->links() }}
+                </div>
             </div>
         </div>
 

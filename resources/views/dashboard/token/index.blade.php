@@ -66,6 +66,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-end p-2 m-0">
+                    {{ $tokens->links() }}
+                </div>
             </div>
         </div>
 
@@ -110,19 +113,19 @@
             $('#select2Basic').select2({
                 placeholder: "Choose tryouts",
                 allowClear: true,
-                multiple: true, 
+                multiple: true,
                 dropdownParent: $('#generateModal')
             });
 
             $('#createTokenForm').submit(function(event) {
-                event.preventDefault(); 
+                event.preventDefault();
 
                 const url = 'http://localhost:8080/tokens/create';
-                const listTryoutIds = $('#select2Basic').val(); 
-                const qty = listTryoutIds.length; 
+                const listTryoutIds = $('#select2Basic').val();
+                const qty = listTryoutIds.length;
 
                 const data = {
-                    qty: "1", 
+                    qty: "1",
                     listTryoutId: listTryoutIds.join(',')
                 };
 
