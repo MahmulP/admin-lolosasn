@@ -14,7 +14,7 @@ class TokenController extends Controller
      */
     public function index()
     {
-        $tokens = Token::paginate(11);
+        $tokens = Token::orderBy('tryoutToken_id', 'desc')->paginate(11);
         $tryouts = Tryout::all();
         return view('dashboard.token.index', ['tokens' => $tokens, 'tryouts' => $tryouts]);
     }
