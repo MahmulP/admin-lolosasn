@@ -46,7 +46,7 @@
                                 </td>
                                 <td>
                                     <div class="avatar me-2">
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
+                                        <a href="#" onclick="openImageModal('{{ $transaction->bukti_transaksi }}')">
                                             <img src="https://storage.googleapis.com/lidm_211/{{ $transaction->bukti_transaksi ?? '' }}"
                                                 alt class="rounded-circle" style="width: 40px; height: 40px;">
                                         </a>
@@ -75,10 +75,10 @@
                                         <div class="dropdown-menu">
                                             @if ($transaction->transaction_status != 'SUKSES' && $transaction->transaction_status != 'GAGAL')
                                                 <a class="dropdown-item" href="javascript:void(0);"
-                                                    onclick="updateTransactionStatus({{ $transaction->transactionRecord_id }}, 'SUKSES')"><i
+                                                    onclick="updateTransactionStatus({{ $transaction->transactionRecord_id }}, 'SUKSES', '{{ Auth::user()->accessToken }}')"><i
                                                         class="bx bx-check me-1"></i> Accept</a>
                                                 <a class="dropdown-item" href="javascript:void(0);"
-                                                    onclick="updateTransactionStatus({{ $transaction->transactionRecord_id }}, 'GAGAL')"><i
+                                                    onclick="updateTransactionStatus({{ $transaction->transactionRecord_id }}, 'GAGAL', '{{ Auth::user()->accessToken }}')"><i
                                                         class="bx bx-x me-1"></i> Deny</a>
                                             @endif
                                         </div>
@@ -105,8 +105,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body p-0">
-                <img src="https://storage.googleapis.com/lidm_211/{{ $transaction->bukti_transaksi ?? '' }}" alt
-                    class="img-fluid w-100 h-100" style="object-fit: contain;">
+                <img id="modalImage" src="" alt class="img-fluid w-100 h-100" style="object-fit: contain;">
             </div>
         </div>
     </div>
@@ -114,8 +113,8 @@
 
 @push('js')
     <script>
-        function updateTransactionStatus(transactionId, status) {
-            const url = `http://localhost:8080/updateTransaction/${transactionId}`;
+        function updateTransactionStatus(transactionId, status, token, reloadPage = true) {
+            const url = `https://backend-asn-jchtbiuxra-et.a.run.app/updateTransaction/${transactionId}`;
             const data = {
                 transaction_status: status
             };
@@ -123,25 +122,38 @@
             fetch(url, {
                     method: 'PUT',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
                     },
                     body: JSON.stringify(data)
                 })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
+                        throw new Error(
+                            `Network response was not ok. Status: ${response.status} ${response.statusText}`);
                     }
                     return response.json();
                 })
                 .then(data => {
                     console.log('Success:', data);
                     alert('Transaction updated successfully!');
-                    window.location.reload();
+                    if (reloadPage) {
+                        window.location.reload();
+                    }
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
                     alert('Failed to update transaction.');
                 });
+        }
+
+        function openImageModal(transactionImage) {
+            const imageUrl = `https://storage.googleapis.com/lidm_211/${transactionImage}`;
+            document.getElementById('modalImage').src = imageUrl;
+
+            // Open the modal
+            const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            imageModal.show();
         }
     </script>
 @endpush

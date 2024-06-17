@@ -10,13 +10,13 @@
     <title>LolosASN - Dashboard</title>
 
 
-    <meta name="description" content="LolosASN adalah aplikasi penyedia layanan tryout terkini dengan analisa AI yang memudahkan kamu mengetahui kekurangan kamu." />
+    <meta name="description"
+        content="LolosASN adalah aplikasi penyedia layanan tryout terkini dengan analisa AI yang memudahkan kamu mengetahui kekurangan kamu." />
     <meta name="keywords" content="dashboard, lolosasn">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon"
-        href="https://demos.pixinvent.com/frest-html-admin-template/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('vendor/assets/img/favicon.ico') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">

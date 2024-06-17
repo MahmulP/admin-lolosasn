@@ -120,9 +120,10 @@
             $('#createTokenForm').submit(function(event) {
                 event.preventDefault();
 
-                const url = 'http://localhost:8080/tokens/create';
+                const url = 'https://backend-asn-jchtbiuxra-et.a.run.app/tokens/create';
                 const listTryoutIds = $('#select2Basic').val();
                 const qty = listTryoutIds.length;
+                const token = '{{ Auth::user()->accessToken }}'
 
                 const data = {
                     qty: "1",
@@ -132,7 +133,8 @@
                 fetch(url, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
                         },
                         body: JSON.stringify(data)
                     })
