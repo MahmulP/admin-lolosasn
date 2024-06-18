@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\Account;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginRequest extends FormRequest
 {
@@ -49,14 +51,19 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        if (Auth::user()->role != 'ADMIN') {
+        $user = Auth::user();
+        $account = Account::find($user->account_id);
+
+        if ($user->role != 'ADMIN') {
             Auth::logout();
             RateLimiter::clear($this->throttleKey());
 
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
-        }
+        } 
+
+        $account->updateAccessTokenIfNeeded();
 
         RateLimiter::clear($this->throttleKey());
     }
