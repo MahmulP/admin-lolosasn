@@ -36,9 +36,6 @@ Open the .env file and configure your database and other settings.
 5. **Generate the Application Key**:
    ```bash
    php artisan key:generate
-5. **Generate the Application Key**:
-   ```bash
-   php artisan key:generate
 6. **Start the Development Server**:
    ```bash
    php artisan serve
