@@ -302,7 +302,7 @@
                         <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                             data-bs-toggle="dropdown">
                             <div class="avatar avatar-online">
-                                <img src="https://storage.googleapis.com/lidm_211/{{ Auth::user()->avatar }}" alt
+                                <img src="{{ Auth::user()->avatar ? 'https://storage.googleapis.com/lidm_211/' . Auth::user()->avatar : asset('vendor/assets/img/empty.jpg') }}" alt
                                     class="rounded-circle">
                             </div>
                         </a>

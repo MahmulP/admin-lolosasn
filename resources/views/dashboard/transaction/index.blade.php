@@ -29,7 +29,7 @@
                                 <td class="fw-medium">
                                     <div class="d-flex align-items-center">
                                         <div class="avatar me-2">
-                                            <img src="https://storage.googleapis.com/lidm_211/{{ $transaction->user->avatar ?? '' }}"
+                                            <img src="{{ $transaction->user->avatar ? 'https://storage.googleapis.com/lidm_211/' . $transaction->user->avatar : asset('vendor/assets/img/empty.jpg') }}"
                                                 alt class="rounded-circle" style="width: 40px; height: 40px;">
                                         </div>
                                         {{ $transaction->user->name ?? '' }}
