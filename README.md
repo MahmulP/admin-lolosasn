@@ -32,10 +32,12 @@ Follow these steps to set up the LolosASN Admin Panel on your local machine:
    Copy the `.env.example` file to `.env`:
    ```bash
    cp .env.example .env
-Open the .env file and configure your database and other settings.
+   Open the .env file and configure your database and other settings.
 5. **Generate the Application Key**:
    ```bash
    php artisan key:generate
 6. **Start the Development Server**:
+   Start the development server by running the following command in your terminal:
    ```bash
    php artisan serve
+
